@@ -1,3 +1,4 @@
+import 'package:connect_sales/authentiation_screens/sign_in_screen.dart';
 import 'package:connect_sales/utils/helping_variables/onBoard.dart';
 import 'package:flutter/material.dart';
 import '../colors.dart';
@@ -94,7 +95,11 @@ class _OnBoardState extends State<OnBoard> {
                   child: Column(
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                            return SignInScreen();
+                          },),);
+                        },
                         child: Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width * 0.45,
@@ -120,7 +125,11 @@ class _OnBoardState extends State<OnBoard> {
                         height: 14,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                            return SignInScreen();
+                          },),);
+                        },
                         child: Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width * 0.45,
