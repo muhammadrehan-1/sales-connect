@@ -1,5 +1,6 @@
-import 'package:connect_sales/authentiation_screens/sign_in_screen.dart';
-import 'package:connect_sales/utils/helping_variables/onBoard.dart';
+import 'package:connect_sales/authentication_screens/sign_in_screen.dart';
+import 'package:connect_sales/utils/helping_widgets/confirm_button.dart';
+import 'package:connect_sales/utils/helping_widgets/onBoard.dart';
 import 'package:flutter/material.dart';
 import '../colors.dart';
 
@@ -13,9 +14,9 @@ class OnBoard extends StatefulWidget {
 class _OnBoardState extends State<OnBoard> {
   var index = 0;
   List<String> belowText = [
-    'Browse through our user-friendly app, where every swipe brings you closer to fashion perfection.',
-    'Shopping made easy – because you deserve to look fabulous without the hassle!',
-    'Connect with buyers worldwide while keeping that local touch. Our platform ensures your unique products reach the right audience, wherever they may be.'
+    'Your one-stop solution for convenient and secure medicine shopping. Find the medications you need with just a few taps.',
+    'Explore a vast range of medicines, healthcare products, and wellness essentials. Fast, reliable, and secure – your health journey begins here.',
+    'Empowering Health, your go-to destination for seamless medicine buying and selling. Connect with trusted sellers, explore a wide range of quality medications, and experience . Your well-being, our priority!"'
   ];
   final List<Widget> setting = [
     firstSelectedRow,
@@ -96,8 +97,8 @@ class _OnBoardState extends State<OnBoard> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                            return SignInScreen();
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return const SignInScreen(title: 'Buyer',);
                           },),);
                         },
                         child: Container(
@@ -126,8 +127,8 @@ class _OnBoardState extends State<OnBoard> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                            return SignInScreen();
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return const SignInScreen(title: 'Seller',);
                           },),);
                         },
                         child: Container(
@@ -141,7 +142,7 @@ class _OnBoardState extends State<OnBoard> {
                             ),
                           ),
                           child: Text(
-                            'Become Member',
+                            'Become Seller',
                             textAlign: TextAlign.center,
                             style: const TextStyle().copyWith(
                               color: Colors.white,
@@ -163,26 +164,7 @@ class _OnBoardState extends State<OnBoard> {
                             index = index + 1;
                           });
                         },
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          height: 56,
-                          decoration: ShapeDecoration(
-                            color: orangeMain,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          child: Text(
-                            'Continue',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle().copyWith(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                        child: const ConfirmButton(howMuchRoundedCorners: 20.0),
                       )
                     ],
                   ),

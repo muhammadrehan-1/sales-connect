@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductHome extends StatelessWidget {
-  const ProductHome({super.key, required this.image, required this.name});
+class CategoryHome extends StatelessWidget {
+  const CategoryHome({super.key, required this.image, required this.name});
 
   final String image;
   final String name;

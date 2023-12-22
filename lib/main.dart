@@ -1,4 +1,4 @@
-import 'package:connect_sales/on_board_screens/on_board1.dart';
+import 'package:connect_sales/on_board_screens/on_board.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 void main() {
