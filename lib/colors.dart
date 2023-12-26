@@ -12,3 +12,4 @@ const backgroundContainerOrange = Color(0xFFFF8B41);
 const orangeIconsText = Color(0xFFFF7643);
 const pink = Color(0xffFFE6E6);
 const greyLight = Color(0xffF5F6F9);
+const veryLightGrey = Color(0xffA1A1A1);

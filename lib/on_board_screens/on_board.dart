@@ -164,7 +164,7 @@ class _OnBoardState extends State<OnBoard> {
                             index = index + 1;
                           });
                         },
-                        child: const ConfirmButton(howMuchRoundedCorners: 20.0),
+                        child: const ConfirmButton(howMuchRoundedCorners: 20.0, text: 'Continue',),
                       )
                     ],
                   ),

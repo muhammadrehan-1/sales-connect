@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import '../../colors.dart';
 
 class ConfirmButton extends StatelessWidget {
-  const ConfirmButton({super.key, required this.howMuchRoundedCorners});
+  const ConfirmButton({super.key, required this.howMuchRoundedCorners, required this.text});
 
   final double howMuchRoundedCorners;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return
@@ -21,7 +22,7 @@ class ConfirmButton extends StatelessWidget {
       ),
       child:
       Text(
-      'Continue',
+      text,
       style: const TextStyle().copyWith(
         color: Colors.white,
         fontSize: 18,

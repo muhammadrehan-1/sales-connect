@@ -1,5 +1,4 @@
 import 'package:connect_sales/authentication_screens/sign_up_screen.dart';
-import 'package:connect_sales/main_screens/home_screen.dart';
 import 'package:connect_sales/main_screens/main_screen.dart';
 import 'package:connect_sales/utils/helping_widgets/confirm_button.dart';
 import 'package:connect_sales/utils/helping_widgets/textformfield.dart';
@@ -98,7 +97,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   labelText: ' Password ',
                   labelStyle:  const TextStyle().copyWith(
                     color: grey,
-                    fontSize: 14,
+                    fontSize: 18,
                     fontWeight: FontWeight.w400,
                   ),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -201,7 +200,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       return const MainScreen();
                     },),);
                   },
-                  child: const ConfirmButton(howMuchRoundedCorners: 20.0)),
+                  child: const ConfirmButton(howMuchRoundedCorners: 20.0, text: 'Continue',)),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
                 width: MediaQuery.of(context).size.width,

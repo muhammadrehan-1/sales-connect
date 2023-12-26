@@ -91,67 +91,58 @@ class _NavBarState extends State<NavBar> {
     ),
       ) ): null,
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(top: 1),
         decoration: const BoxDecoration(
-          color: orangeMain,
-          borderRadius:  BorderRadius.only(
-            topLeft:  Radius.circular(39),
-            topRight:  Radius.circular(39),
-          ),
-
+          color: Colors.white,
         ),
-        child:  ClipRRect(
-             borderRadius: const BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-            child: BottomNavigationBar(
-              backgroundColor: Colors.white,
-              currentIndex: index,
-              onTap: (int newIndex){
-                setState(() {
-                  index = newIndex;
-                });
-              },
-              items: [
-                BottomNavigationBarItem(
-                    icon: SvgPicture.asset('assets/icons/shop_icon.svg', height: 21, width: 22,),
-                    activeIcon: SvgPicture.asset('assets/icons/home_active.svg',height: 30, width: 22,),
-                    label: ''
-                ),
-                BottomNavigationBarItem(
-                    icon: SvgPicture.asset('assets/icons/heart_icon.svg', height: 21, width: 22),
-                    activeIcon: SvgPicture.asset('assets/icons/heart_icon_colored.svg',height: 30, width: 22),
-                    label: ''
-                ),
-                BottomNavigationBarItem(
-                    icon: SvgPicture.asset('assets/icons/chat_icon.svg', height: 21, width: 22),
-                    activeIcon: Column(
-                      children: [
-                        SvgPicture.asset('assets/icons/chat_icon_colored.svg',height: 21, width: 22),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        SvgPicture.asset('assets/icons/dot_colored.svg',height: 3, width: 3),
-                      ],
-                    ),
-                    label: ''
-                ),
-                BottomNavigationBarItem(
-                    icon: SvgPicture.asset('assets/icons/user_icon.svg', height: 21, width: 22),
-                    activeIcon: Column(
-                      children: [
-                        SvgPicture.asset('assets/icons/user_icon_colored.svg',height: 21, width: 22),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        SvgPicture.asset('assets/icons/dot_colored.svg',height: 3, width: 3),
-                      ],
-                    ),
-                    label: ''
-                ),
-              ],
-              selectedItemColor: orangeIconsText,
-              type: BottomNavigationBarType.fixed,
+        child:  BottomNavigationBar(
+          backgroundColor: Colors.white,
+          currentIndex: index,
+          onTap: (int newIndex){
+            setState(() {
+              index = newIndex;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/shop_icon.svg', height: 21, width: 22,),
+                activeIcon: SvgPicture.asset('assets/icons/home_active.svg',height: 30, width: 22,),
+                label: ''
             ),
-          ),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/heart_icon.svg', height: 21, width: 22),
+                activeIcon: SvgPicture.asset('assets/icons/heart_icon_colored.svg',height: 30, width: 22),
+                label: ''
+            ),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/chat_icon.svg', height: 21, width: 22),
+                activeIcon: Column(
+                  children: [
+                    SvgPicture.asset('assets/icons/chat_icon_colored.svg',height: 21, width: 22),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SvgPicture.asset('assets/icons/dot_colored.svg',height: 3, width: 3),
+                  ],
+                ),
+                label: ''
+            ),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/user_icon.svg', height: 21, width: 22),
+                activeIcon: Column(
+                  children: [
+                    SvgPicture.asset('assets/icons/user_icon_colored.svg',height: 21, width: 22),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SvgPicture.asset('assets/icons/dot_colored.svg',height: 3, width: 3),
+                  ],
+                ),
+                label: ''
+            ),
+          ],
+          selectedItemColor: orangeIconsText,
+          type: BottomNavigationBarType.fixed,
+        ),
         ),
 
       body: screens[index],

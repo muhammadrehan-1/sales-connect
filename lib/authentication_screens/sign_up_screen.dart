@@ -111,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: ' Password ',
                   labelStyle:  const TextStyle().copyWith(
                     color: grey,
-                    fontSize: 14,
+                    fontSize: 18,
                     fontWeight: FontWeight.w400,
                   ),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -147,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: ' Confirm password ',
                   labelStyle:  const TextStyle().copyWith(
                     color: grey,
-                    fontSize: 14,
+                    fontSize: 18,
                     fontWeight: FontWeight.w400,
                   ),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -240,6 +240,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
                 child: const ConfirmButton(
                   howMuchRoundedCorners: 28.0,
+                    text: 'Continue',
                 ),
               ),
             ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../colors.dart';
 
 
@@ -17,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
         labelText: ' $label ',
         labelStyle:  const TextStyle().copyWith(
           color: grey,
-          fontSize: 14,
+          fontSize: 18,
           fontWeight: FontWeight.w400,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
