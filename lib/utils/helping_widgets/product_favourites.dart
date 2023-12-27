@@ -31,6 +31,12 @@ class ProductFavourites extends StatelessWidget {
                  SizedBox(
                   height: MediaQuery.of(context).size.height * 0.009,
                 ),
+                //If you want to check that SVG is working or not un comment below code and make sure in dummy products change the image name to svg.
+
+                // SvgPicture.asset(image,
+                // height: MediaQuery.of(context).size.height * 0.1,
+                //   width: 87,
+                // ),
                 Image(
                   height: MediaQuery.of(context).size.height * 0.1,
                   width: 87,
