@@ -5,9 +5,7 @@ import 'package:connect_sales/utils/helping_widgets/product_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../colors.dart';
-import '../models/product.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,12 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List<Product> favouriteProducts = [];
-  // void addingProductToFavourites(String image, String name, double price, String info){
-  //   favouriteProducts.add(
-  //     Product(info: info, image: image, name: name, price: price),
-  //   );
-  // }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -153,10 +145,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     MaterialPageRoute(builder: (context) {
                       return ProductDetailScreen(
-                          image: dummyProducts[item].image,
-                          name: dummyProducts[item].name,
-                          info: dummyProducts[item].info,
-                          price: dummyProducts[item].price);
+                         product: dummyProducts[item],
+                      );
                     }),
                   );
                 },

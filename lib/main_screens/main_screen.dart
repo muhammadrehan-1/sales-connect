@@ -1,9 +1,11 @@
 import 'package:connect_sales/colors.dart';
 import 'package:connect_sales/main_screens/favourites_screen.dart';
 import 'package:connect_sales/main_screens/profile_screen.dart';
+import 'package:connect_sales/provider/favourites_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-
+import '../models/product.dart';
 import 'home_screen.dart';
 import 'messages_screen.dart';
 
@@ -18,36 +20,31 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return  const NavBar();
-
   }
 }
 
 
 
-class NavBar extends StatefulWidget {
+class NavBar extends ConsumerStatefulWidget {
   const NavBar({super.key});
 
   @override
-  State<NavBar> createState() => _NavBarState();
+  ConsumerState<NavBar> createState() => _NavBarState();
 }
 
-class _NavBarState extends State<NavBar> {
+class _NavBarState extends ConsumerState<NavBar> {
   int index = 0;
   late List<Widget> screens;
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    final favouriteItems = ref.watch(favouriteItemsProvider);
     screens = [
-      const HomeScreen(),
-      const FavouritesScreen(),
+      const  HomeScreen(),
+      FavouritesScreen(favouriteProducts: favouriteItems),
       const MessagesScreen(),
       const ProfileScreen(),
     ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
        appBar: index != 0 ? AppBar(

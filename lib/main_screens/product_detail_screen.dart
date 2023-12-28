@@ -1,34 +1,23 @@
 import 'package:connect_sales/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../models/product.dart';
+import '../provider/favourites_provider.dart';
 
-class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen(
-      {super.key,
-      required this.image,
-      required this.name,
-      required this.price,
-      required this.info,
-        // required this.addingItemsToFavouriteList
-      });
+class ProductDetailScreen extends ConsumerStatefulWidget {
+  const ProductDetailScreen({super.key, required this.product});
 
-  final String image;
-  final String name;
-  final double price;
-  final String info;
-  // final void Function({String image, String name, double price, String info}) addingItemsToFavouriteList;
+  final Product product;
 
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  ConsumerState<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
-
-  bool isFavourite = false;
-
+class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   var items = 1;
+  bool isFavourite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +50,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Align(
               alignment: Alignment.center,
               child: Image(
-                image: AssetImage(widget.image),
+                image: AssetImage(widget.product.image),
                 height: MediaQuery.of(context).size.height * 0.3,
                 // width: MediaQuery.of(context).size.width * 0.5,
                 fit: BoxFit.contain,
@@ -88,7 +77,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     height: MediaQuery.of(context).size.height * 0.025,
                   ),
                   Text(
-                    widget.name,
+                    widget.product.name,
                     textAlign: TextAlign.center,
                     style: const TextStyle().copyWith(
                       color: Colors.black,
@@ -100,7 +89,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$${widget.price}',
+                        '\$${widget.product.price}',
                         style: const TextStyle().copyWith(
                           color: orangeIconsText,
                           fontSize: 24,
@@ -122,19 +111,29 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         ),
                         child: InkWell(
-                            onTap: (){
-                              setState(() {
-                                isFavourite = !isFavourite;
-                              });
-                            },
-                            child: isFavourite ? SvgPicture.asset('assets/icons/heart_icon_colored_2.svg') : SvgPicture.asset('assets/icons/heart_icon.svg'),),
+                          onTap: () {
+                            final isAdded = ref
+                                .read(favouriteItemsProvider.notifier)
+                                .toggleFavouriteStatus(widget.product);
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(
+                                isAdded? 'Item added as favourite' : 'Item removed from favourite'
+                              ),),
+                            );
+                          },
+                          child: isFavourite
+                              ? SvgPicture.asset(
+                                  'assets/icons/heart_icon_colored_2.svg')
+                              : SvgPicture.asset('assets/icons/heart_icon.svg'),
+                        ),
                       ),
                     ],
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 30),
                     child: Text(
-                      widget.info,
+                      widget.product.info,
                       textAlign: TextAlign.start,
                       style: const TextStyle().copyWith(
                         wordSpacing: 2.0,
@@ -156,12 +155,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         Container(
                           padding: const EdgeInsets.all(15),
                           alignment: Alignment.center,
-                          decoration: const ShapeDecoration(shape: CircleBorder(
-                            side: BorderSide(
-                              color: orangeIconsText,
-                            )
-                          )),
-                          child: SvgPicture.asset('assets/icons/cart_icon_colored.svg'),
+                          decoration: const ShapeDecoration(
+                              shape: CircleBorder(
+                                  side: BorderSide(
+                            color: orangeIconsText,
+                          ))),
+                          child: SvgPicture.asset(
+                              'assets/icons/cart_icon_colored.svg'),
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.35,
@@ -170,23 +170,28 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               InkWell(
-                                  onTap: (){
-                                    setState(() {
-                                      if(items == 1){
-                                        return;
-                                      }
-                                      items--;
-                                    });
-                                  },
-                                  child:  Container(
-                                      padding: const EdgeInsets.all(12),
-                                      alignment: Alignment.center,
-                                      decoration: const ShapeDecoration(shape: CircleBorder(
+                                onTap: () {
+                                  setState(() {
+                                    if (items == 1) {
+                                      return;
+                                    }
+                                    items--;
+                                  });
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(12),
+                                  alignment: Alignment.center,
+                                  decoration: const ShapeDecoration(
+                                      shape: CircleBorder(
                                           side: BorderSide(
-                                            color: iconGrey,
-                                          )
-                                      )),
-                                      child: const Icon(Icons.remove, color: iconGrey,),),),
+                                    color: iconGrey,
+                                  ))),
+                                  child: const Icon(
+                                    Icons.remove,
+                                    color: iconGrey,
+                                  ),
+                                ),
+                              ),
                               Text(
                                 '$items',
                                 textAlign: TextAlign.center,
@@ -197,20 +202,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 ),
                               ),
                               InkWell(
-                                  onTap: (){
-                                    setState(() {
-                                      items++;
-                                    });
-                                  },
-                                  child:  Container(
-                                    padding: const EdgeInsets.all(12),
-                                    alignment: Alignment.center,
-                                    decoration: const ShapeDecoration(shape: CircleBorder(
-                                        side: BorderSide(
-                                          color: iconGrey,
-                                        )
-                                    )),
-                                    child: const Icon(Icons.add, color:iconGrey),),),
+                                onTap: () {
+                                  setState(() {
+                                    items++;
+                                  });
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(12),
+                                  alignment: Alignment.center,
+                                  decoration: const ShapeDecoration(
+                                      shape: CircleBorder(
+                                          side: BorderSide(
+                                    color: iconGrey,
+                                  ))),
+                                  child: const Icon(Icons.add, color: iconGrey),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -228,7 +235,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       height: MediaQuery.of(context).size.height * 0.08,
                       decoration: ShapeDecoration(
-                        color:orangeMain,
+                        color: orangeMain,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -247,7 +254,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
-
                 ],
               ),
             ),
@@ -257,4 +263,3 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 }
-
