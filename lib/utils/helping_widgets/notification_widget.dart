@@ -99,11 +99,11 @@ class NotificationWidget extends StatelessWidget {
                         : (orderType == OrderType.confirmed)
                             ? MidColoredText(
                     text:
-                    'Payment order $orderNum has been confirmed. Please wait for the product to be sent',
+                    'Order $orderNum has been confirmed. Please wait for the product to be sent',
                     orderNum: orderNum)
                             : MidColoredText(
                     text:
-                    'Refunds order $orderNum have been processed. A fund of \$120 will be returned in 15 minutes',
+                    'Order $orderNum have been processed. A fund of \$120 will be returned in 15 minutes',
                     orderNum: orderNum),
                 const SizedBox(
                   height: 6,

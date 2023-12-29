@@ -6,9 +6,7 @@ final List<Notification> dummyNotifications = [
       orderNum: 24089794727000824,
       date: 'August 21,2023 (08:00 pm)'),
   const Notification(
-
       orderType: OrderType.confirmed,
-
       orderNum: 24089794727000824,
       date: 'August 21,2023 (08:00 pm)'),
   const Notification(
@@ -17,9 +15,7 @@ final List<Notification> dummyNotifications = [
       orderNum: 24089794727000824,
       date: 'August 21,2023 (08:00 pm)'),
   const Notification(
-
       orderType: OrderType.success,
-
       orderNum: 24089794727000824,
       date: 'August 21,2023 (08:00 pm)'),
 

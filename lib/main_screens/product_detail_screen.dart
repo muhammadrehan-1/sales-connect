@@ -1,9 +1,11 @@
 import 'package:connect_sales/colors.dart';
+import 'package:connect_sales/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import '../models/product.dart';
 import '../provider/favourites_provider.dart';
+import 'cart_screen.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
   const ProductDetailScreen({super.key, required this.product});
@@ -17,10 +19,22 @@ class ProductDetailScreen extends ConsumerStatefulWidget {
 
 class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   var items = 1;
-  bool isFavourite = false;
+  late bool isFavourite;
 
   @override
   Widget build(BuildContext context) {
+    List<Product> products = ref.read(favouriteItemsProvider);
+    final isAdded = products.contains(widget.product);
+    if (isAdded) {
+      setState(() {
+        isFavourite = isAdded;
+      });
+    } else {
+      setState(() {
+        isFavourite = isAdded;
+      });
+    }
+
     return Scaffold(
       backgroundColor: greyLight,
       appBar: AppBar(
@@ -117,10 +131,15 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                 .toggleFavouriteStatus(widget.product);
                             ScaffoldMessenger.of(context).clearSnackBars();
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(
-                                isAdded? 'Item added as favourite' : 'Item removed from favourite'
-                              ),),
+                              SnackBar(
+                                content: Text(isAdded
+                                    ? 'Item added as favourite'
+                                    : 'Item removed from favourite'),
+                              ),
                             );
+                            setState(() {
+                              isFavourite = isAdded;
+                            });
                           },
                           child: isFavourite
                               ? SvgPicture.asset(
@@ -229,24 +248,35 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                   ),
                   Align(
                     alignment: Alignment.center,
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 25),
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      height: MediaQuery.of(context).size.height * 0.08,
-                      decoration: ShapeDecoration(
-                        color: orangeMain,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                    child: InkWell(
+                      onTap: () {
+                        ref.read(cartProvider.notifier).addingIntoCart(
+                             widget.product,
+                          items
+                            );
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return const CartScreen();
+                        }));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 25),
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        height: MediaQuery.of(context).size.height * 0.08,
+                        decoration: ShapeDecoration(
+                          color: orangeMain,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        'Add to Cart',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle().copyWith(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
+                        child: Text(
+                          'Add to Cart',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle().copyWith(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),

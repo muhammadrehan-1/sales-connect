@@ -4,6 +4,7 @@ import 'package:connect_sales/main_screens/settings_screen.dart';
 import 'package:connect_sales/utils/helping_widgets/list_tile_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'change_pass_screen.dart';
 import 'notifications_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -57,6 +58,20 @@ class ProfileScreen extends StatelessWidget {
             },
             child: const ListTileProfile(
                 name: 'My Account', icon: 'assets/icons/user_icon_colored.svg'),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const ChangePassScreen();
+                  },
+                ),
+              );
+            },
+            child: const ListTileProfile(
+                name: 'Change Password', icon: 'assets/icons/lock_colored.svg'),
           ),
           InkWell(
             onTap: () {

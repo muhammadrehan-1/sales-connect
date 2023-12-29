@@ -13,7 +13,7 @@ class ListTileProfile extends StatelessWidget {
     return  Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: ListTile(
-        contentPadding: const EdgeInsets.all(10),
+        contentPadding: const EdgeInsets.all(5),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),

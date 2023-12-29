@@ -85,98 +85,97 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
             Container(
               padding: const EdgeInsets.only(left: 32, right: 32),
-              child:  Expanded(
-                  child: Column(
+              child:  Column(
                 children: [
-                  const CustomTextFormField(
-                    label: 'First Name',
-                    hint: '',
-                    iconPath: 'assets/icons/user.svg',
+              const CustomTextFormField(
+                label: 'First Name',
+                hint: '',
+                iconPath: 'assets/icons/user.svg',
+              ),
+              customSizedBox,
+              const CustomTextFormField(
+                label: 'Last Name',
+                hint: '',
+                iconPath: 'assets/icons/user.svg',
+              ),
+              customSizedBox,
+              const CustomTextFormField(
+                  label: 'Phone Number',
+                  hint: '',
+                  iconPath: 'assets/icons/phone.svg'),
+              customSizedBox,
+              const CustomTextFormField(
+                  label: 'Email',
+                  hint: '',
+                  iconPath: 'assets/icons/mail.svg'),
+              customSizedBox,
+              TextFormField(
+                obscureText: isPassHidden,
+                decoration: InputDecoration(
+                  labelText: ' Password ',
+                  labelStyle:  const TextStyle().copyWith(
+                    color: grey,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
                   ),
-                  customSizedBox,
-                  const CustomTextFormField(
-                    label: 'Last Name',
-                    hint: '',
-                    iconPath: 'assets/icons/user.svg',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  contentPadding: const EdgeInsets.only(left: 35),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(18),
+                    child: InkWell(
+                      onTap: (){
+                        setState(() {
+                          isPassHidden = !isPassHidden;
+                        });
+                      },
+                      child: SvgPicture.asset('assets/icons/lock.svg'),),
                   ),
-                  customSizedBox,
-                  const CustomTextFormField(
-                      label: 'Phone Number',
-                      hint: '',
-                      iconPath: 'assets/icons/phone.svg'),
-                  customSizedBox,
-                  const CustomTextFormField(
-                      label: 'Email',
-                      hint: '',
-                      iconPath: 'assets/icons/mail.svg'),
-                  customSizedBox,
-                  TextFormField(
-                    obscureText: isPassHidden,
-                    decoration: InputDecoration(
-                      labelText: ' Password ',
-                      labelStyle:  const TextStyle().copyWith(
-                        color: grey,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      contentPadding: const EdgeInsets.only(left: 35),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.all(18),
-                        child: InkWell(
-                          onTap: (){
-                            setState(() {
-                              isPassHidden = !isPassHidden;
-                            });
-                          },
-                          child: SvgPicture.asset('assets/icons/lock.svg'),),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(28),
-                        borderSide: const BorderSide(
-                          color: grey,
-                        ),
-                      ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(28),
+                    borderSide: const BorderSide(
+                      color: grey,
                     ),
                   ),
-                  customSizedBox,
-                  const CustomTextFormField(
-                      label: 'Address',
-                      hint: '',
-                      iconPath: 'assets/icons/location_point.svg'),
-                  customSizedBox,
-                  const CustomTextFormField(
-                      label: 'Postal Code',
-                      hint: '',
-                      iconPath: 'assets/icons/location_point.svg'),
-                  customSizedBox,
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: ' Home Number ',
-                      labelStyle:  const TextStyle().copyWith(
-                        color: grey,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      contentPadding: const EdgeInsets.only(left: 35),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.all(18),
-                        child: SvgPicture.asset('assets/icons/location_point.svg'),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(28),
-                        borderSide: const BorderSide(
-                          color: grey,
-                        ),
-                      ),
+                ),
+              ),
+              customSizedBox,
+              const CustomTextFormField(
+                  label: 'Address',
+                  hint: '',
+                  iconPath: 'assets/icons/location_point.svg'),
+              customSizedBox,
+              const CustomTextFormField(
+                  label: 'Postal Code',
+                  hint: '',
+                  iconPath: 'assets/icons/location_point.svg'),
+              customSizedBox,
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: ' Home Number ',
+                  labelStyle:  const TextStyle().copyWith(
+                    color: grey,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  contentPadding: const EdgeInsets.only(left: 35),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(18),
+                    child: SvgPicture.asset('assets/icons/location_point.svg'),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(28),
+                    borderSide: const BorderSide(
+                      color: grey,
                     ),
                   ),
-                  customSizedBox,
-                  const ConfirmButton(howMuchRoundedCorners: 28, text: 'Save Changes',),
-                  customSizedBox,
+                ),
+              ),
+              customSizedBox,
+              const ConfirmButton(howMuchRoundedCorners: 28, text: 'Save Changes',),
+              customSizedBox,
                 ],
-              ),),
+              ),
             ),
           ],
         ),

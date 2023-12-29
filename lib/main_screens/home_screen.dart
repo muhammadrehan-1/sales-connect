@@ -1,22 +1,29 @@
 import 'package:connect_sales/dummy%20data/dummy_products.dart';
 import 'package:connect_sales/main_screens/product_detail_screen.dart';
 import 'package:connect_sales/utils/helping_widgets/custom_container.dart';
+import 'package:connect_sales/utils/helping_widgets/icon_with_numbers.dart';
 import 'package:connect_sales/utils/helping_widgets/product_home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../colors.dart';
+import '../dummy data/dummy_notifications.dart';
+import '../provider/cart_provider.dart';
 
-class HomeScreen extends StatefulWidget {
+
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final dummyNotificationsLength = dummyNotifications.length;
+    final cartListLength = ref.watch(cartProvider.notifier).gettingListLength();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -65,40 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               width: 10,
             ),
-            SizedBox(
-              height: 46,
-              width: 46,
-              child: SvgPicture.asset('assets/icons/chart_button.svg'),
-            ),
+            IconsWithNumbers(iconNumber: cartListLength, image: 'assets/icons/chart_button.svg', isNotificationScreen: false),
             const SizedBox(
               width: 10,
             ),
-            Stack(
-              children: [
-                SizedBox(
-                  height: 46,
-                  width: 46,
-                  child:
-                      SvgPicture.asset('assets/icons/notification_button.svg'),
-                ),
-                Positioned(
-                  bottom: 30,
-                  left: 30,
-                  child: CircleAvatar(
-                    radius: 7,
-                    backgroundColor: backgroundOrange,
-                    child: Text(
-                      '3',
-                      style: const TextStyle().copyWith(
-                        color: Colors.white,
-                        fontSize: 9.14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
+            IconsWithNumbers(iconNumber: dummyNotificationsLength, image: 'assets/icons/notification_button.svg', isNotificationScreen: true,)
           ],
         ),
         SizedBox(
@@ -147,7 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       return ProductDetailScreen(
                          product: dummyProducts[item],
                       );
-                    }),
+                    },
+
+                    ),
                   );
                 },
                 child: ProductHome(

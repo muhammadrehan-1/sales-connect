@@ -5,7 +5,6 @@ import 'package:connect_sales/provider/favourites_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import '../models/product.dart';
 import 'home_screen.dart';
 import 'messages_screen.dart';
 
@@ -53,7 +52,9 @@ class _NavBarState extends ConsumerState<NavBar> {
         leadingWidth: 64,
         leading: InkWell(
           onTap: () {
-            Navigator.pop(context);
+           setState(() {
+             index = 0;
+           });
           },
           child: Container(
             margin: const EdgeInsets.only(left: 24),

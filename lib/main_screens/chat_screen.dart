@@ -43,7 +43,7 @@ class ChatScreen extends StatelessWidget {
         children: [
           ListView(
             padding: const EdgeInsets.only(left: 10, right: 10),
-            children: const [
+            children:  const [
               MessageSent(
                   message: 'Hey, How are you?',
                   image: 'assets/icons/message_person.svg',
@@ -58,11 +58,6 @@ class ChatScreen extends StatelessWidget {
                   time: '8:10 am'),
               MessageSent(
                   message: 'Hey, How are you?',
-                  image: 'assets/icons/message_person.svg',
-                  time: '8:10 am'),
-              MessageReceived(
-                  name: 'Rehan',
-                  message: 'Fine',
                   image: 'assets/icons/message_person.svg',
                   time: '8:10 am'),
               MessageReceived(
@@ -84,8 +79,9 @@ class ChatScreen extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(left:15, right: 15, bottom: 10),
+            child: Container(
+              color: Colors.white,
+              padding: const EdgeInsets.only(left:15, right: 15, bottom: 10, top: 10),
               child: TextFormField(
 
                 cursorColor: orangeMain,
