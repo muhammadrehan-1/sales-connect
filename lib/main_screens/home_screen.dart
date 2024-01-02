@@ -1,5 +1,6 @@
 import 'package:connect_sales/dummy%20data/dummy_products.dart';
 import 'package:connect_sales/main_screens/product_detail_screen.dart';
+import 'package:connect_sales/provider/buyer_or_seller_provider.dart';
 import 'package:connect_sales/utils/helping_widgets/custom_container.dart';
 import 'package:connect_sales/utils/helping_widgets/icon_with_numbers.dart';
 import 'package:connect_sales/utils/helping_widgets/product_home.dart';
@@ -24,6 +25,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final dummyNotificationsLength = dummyNotifications.length;
     final cartListLength = ref.watch(cartProvider.notifier).gettingListLength();
+    final isBuyer = ref.watch(buyerOrSellerProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -36,7 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: isBuyer ? MediaQuery.of(context).size.width * 0.5: MediaQuery.of(context).size.width * 0.8,
               child: TextFormField(
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -69,14 +71,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
             ),
-            const SizedBox(
+            isBuyer? const SizedBox(
               width: 10,
-            ),
-            IconsWithNumbers(iconNumber: cartListLength, image: 'assets/icons/chart_button.svg', isNotificationScreen: false),
-            const SizedBox(
+            ) : SizedBox(),
+           isBuyer ? IconsWithNumbers(iconNumber: cartListLength, image: 'assets/icons/chart_button.svg', isNotificationScreen: false) : SizedBox(),
+            isBuyer? const SizedBox(
               width: 10,
-            ),
-            IconsWithNumbers(iconNumber: dummyNotificationsLength, image: 'assets/icons/notification_button.svg', isNotificationScreen: true,)
+            ) : SizedBox(),
+            isBuyer ?IconsWithNumbers(iconNumber: dummyNotificationsLength, image: 'assets/icons/notification_button.svg', isNotificationScreen: true,) : SizedBox(),
           ],
         ),
         SizedBox(
@@ -130,9 +132,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                   );
                 },
-                child: ProductHome(
-                    image: dummyProducts[item].image,
-                    name: dummyProducts[item].name),
+                child: ProductHome(product: dummyProducts[item]),
               );
             },
           ),

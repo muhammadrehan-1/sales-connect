@@ -8,7 +8,7 @@ class CustomTextFormField extends StatelessWidget {
 
   final String label;
   final String hint;
-  final String iconPath;
+  final String? iconPath;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -20,10 +20,10 @@ class CustomTextFormField extends StatelessWidget {
           fontWeight: FontWeight.w400,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding: const EdgeInsets.only(left: 35),
+        contentPadding: const EdgeInsets.only(left: 25, right: 5),
         suffixIcon: Padding(
           padding: const EdgeInsets.all(18),
-          child: SvgPicture.asset(iconPath),
+          child: iconPath != null ? SvgPicture.asset(iconPath!) : const SizedBox(),
         ),
         hintText: hint,
         hintStyle: const TextStyle().copyWith(

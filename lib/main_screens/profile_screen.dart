@@ -1,17 +1,20 @@
 import 'package:connect_sales/main_screens/account_screen.dart';
 import 'package:connect_sales/main_screens/help_center_screen.dart';
 import 'package:connect_sales/main_screens/settings_screen.dart';
+import 'package:connect_sales/provider/buyer_or_seller_provider.dart';
 import 'package:connect_sales/utils/helping_widgets/list_tile_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'change_pass_screen.dart';
 import 'notifications_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isBuyer = ref.watch(buyerOrSellerProvider);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -73,7 +76,7 @@ class ProfileScreen extends StatelessWidget {
             child: const ListTileProfile(
                 name: 'Change Password', icon: 'assets/icons/lock_colored.svg'),
           ),
-          InkWell(
+          isBuyer ? InkWell(
             onTap: () {
               Navigator.push(
                 context,
@@ -87,7 +90,7 @@ class ProfileScreen extends StatelessWidget {
             child: const ListTileProfile(
                 name: 'Notifications',
                 icon: 'assets/icons/notification_colored.svg'),
-          ),
+          ): SizedBox(),
           InkWell(
             onTap: () {
               Navigator.push(

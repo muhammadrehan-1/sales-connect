@@ -1,6 +1,8 @@
 import 'package:connect_sales/colors.dart';
+import 'package:connect_sales/main_screens/add_product_screen.dart';
 import 'package:connect_sales/main_screens/favourites_screen.dart';
 import 'package:connect_sales/main_screens/profile_screen.dart';
+import 'package:connect_sales/provider/buyer_or_seller_provider.dart';
 import 'package:connect_sales/provider/favourites_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,8 +24,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-
-
 class NavBar extends ConsumerStatefulWidget {
   const NavBar({super.key});
 
@@ -35,12 +35,14 @@ class _NavBarState extends ConsumerState<NavBar> {
   int index = 0;
   late List<Widget> screens;
 
+
   @override
   Widget build(BuildContext context) {
     final favouriteItems = ref.watch(favouriteItemsProvider);
-    screens = [
+    final isBuyer = ref.watch(buyerOrSellerProvider);
+     screens = [
       const  HomeScreen(),
-      FavouritesScreen(favouriteProducts: favouriteItems),
+       isBuyer ? FavouritesScreen(favouriteProducts: favouriteItems) : const AddProductScreen(),
       const MessagesScreen(),
       const ProfileScreen(),
     ];
@@ -64,7 +66,7 @@ class _NavBarState extends ConsumerState<NavBar> {
           ),
         ),
         title: (index == 1)? Text(
-          'Favourites',
+          isBuyer ? 'Favourites' : 'Add Product',
           textAlign: TextAlign.center,
           style: const TextStyle().copyWith(
             color: grey,
@@ -107,8 +109,8 @@ class _NavBarState extends ConsumerState<NavBar> {
                 label: ''
             ),
             BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/icons/heart_icon.svg', height: 21, width: 22),
-                activeIcon: SvgPicture.asset('assets/icons/heart_icon_colored.svg',height: 30, width: 22),
+                icon: isBuyer ? SvgPicture.asset('assets/icons/heart_icon.svg', height: 21, width: 22) :  SvgPicture.asset('assets/icons/add_product_button.svg', height: 21, width: 22),
+                activeIcon: isBuyer ? SvgPicture.asset('assets/icons/heart_icon_colored.svg',height: 30, width: 22): SvgPicture.asset('assets/icons/add_product_button_colored.svg',height: 30, width: 22),
                 label: ''
             ),
             BottomNavigationBarItem(

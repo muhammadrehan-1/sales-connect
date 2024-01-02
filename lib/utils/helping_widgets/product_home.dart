@@ -1,14 +1,19 @@
+import 'package:connect_sales/provider/buyer_or_seller_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductHome extends StatelessWidget {
-  const ProductHome({super.key, required this.image, required this.name});
+import '../../colors.dart';
+import '../../models/product.dart';
 
-  final String image;
-  final String name;
+class ProductHome extends ConsumerWidget {
+  const ProductHome({super.key, required this.product});
+
+ final Product product;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isBuyer = ref.watch(buyerOrSellerProvider);
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.3,
       height: MediaQuery.of(context).size.height * 0.16,
@@ -29,16 +34,37 @@ class ProductHome extends StatelessWidget {
             //If you want to check that SVG is working or not un comment below code and make sure in dummy products change the image name to svg.
 
             // SvgPicture.asset(image, height: 84, width: 87,),
-            Image(
+            isBuyer? Image(
               height: 84,
               width: 87,
-              image: AssetImage(image),),
+              image: AssetImage(product.image),) : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Image(
+                  height: 74,
+                  width: 77,
+                  image: AssetImage(product.image),),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
+                ),
+                Text(
+                  '${product.price}\$',
+                  textAlign: TextAlign.right,
+                  style: const TextStyle().copyWith(
+                    color: orangeIconsText,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                  ),
+                )
+              ],
+            ),
           ),
           const SizedBox(
             height: 8,
           ),
           Text(
-            name,
+            product.name,
             textAlign: TextAlign.center,
             style: GoogleFonts.beVietnamPro().copyWith(
               color: const Color(0xFF151921),

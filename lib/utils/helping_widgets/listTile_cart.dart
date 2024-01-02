@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../models/product.dart';
 import '../../provider/cart_provider.dart';
 

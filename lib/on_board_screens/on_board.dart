@@ -1,17 +1,20 @@
 import 'package:connect_sales/authentication_screens/sign_in_screen.dart';
+import 'package:connect_sales/provider/buyer_or_seller_provider.dart';
 import 'package:connect_sales/utils/helping_widgets/confirm_button.dart';
 import 'package:connect_sales/utils/helping_widgets/onBoard.dart';
 import 'package:flutter/material.dart';
 import '../colors.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OnBoard extends StatefulWidget {
+
+class OnBoard extends ConsumerStatefulWidget {
   const OnBoard({super.key});
 
   @override
-  State<OnBoard> createState() => _OnBoardState();
+  ConsumerState<OnBoard> createState() => _OnBoardState();
 }
 
-class _OnBoardState extends State<OnBoard> {
+class _OnBoardState extends ConsumerState<OnBoard> {
   var index = 0;
   List<String> belowText = [
     'Your one-stop solution for convenient and secure medicine shopping. Find the medications you need with just a few taps.',
@@ -97,6 +100,7 @@ class _OnBoardState extends State<OnBoard> {
                     children: [
                       InkWell(
                         onTap: () {
+                          ref.read(buyerOrSellerProvider.notifier).isBuyer(true);
                           Navigator.push(context, MaterialPageRoute(builder: (context){
                             return const SignInScreen(title: 'Buyer',);
                           },),);
@@ -127,8 +131,9 @@ class _OnBoardState extends State<OnBoard> {
                       ),
                       InkWell(
                         onTap: () {
+                          ref.read(buyerOrSellerProvider.notifier).isBuyer(false);
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const SignInScreen(title: 'Seller',);
+                            return const SignInScreen(title: 'Seller');
                           },),);
                         },
                         child: Container(

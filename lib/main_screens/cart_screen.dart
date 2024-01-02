@@ -1,3 +1,4 @@
+import 'package:connect_sales/main_screens/payment_screen.dart';
 import 'package:connect_sales/provider/cart_provider.dart';
 import 'package:connect_sales/utils/helping_widgets/listTile_cart.dart';
 import 'package:flutter/material.dart';
@@ -120,22 +121,29 @@ class CartScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    height: MediaQuery.of(context).size.height * 0.065,
-                    alignment: Alignment.center,
-                    decoration: ShapeDecoration(
-                      color: orangeMain,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                  InkWell(
+                    onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (context){
+                       return  PaymentScreen(addedPrice: priceOfAllItems);
+                     }));
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: MediaQuery.of(context).size.height * 0.065,
+                      alignment: Alignment.center,
+                      decoration: ShapeDecoration(
+                        color: orangeMain,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      'Check Out',
-                      style: const TextStyle().copyWith(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
+                      child: Text(
+                        'Check Out',
+                        style: const TextStyle().copyWith(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
