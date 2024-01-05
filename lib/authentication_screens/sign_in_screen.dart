@@ -1,10 +1,10 @@
 import 'package:connect_sales/authentication_screens/sign_up_screen.dart';
+import 'package:connect_sales/main_screens/forgot_pass_screen.dart';
 import 'package:connect_sales/main_screens/main_screen.dart';
 import 'package:connect_sales/utils/helping_widgets/confirm_button.dart';
 import 'package:connect_sales/utils/helping_widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../colors.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -177,15 +177,23 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                   ),
-                  Text(
-                    'Forgot Password',
-                    style: const TextStyle().copyWith(
-                      color: orange,
-                      fontSize: 14,
-                      fontFamily: 'Mulish',
-                      fontWeight: FontWeight.w400,
-                      textBaseline: TextBaseline.ideographic,
-                      decoration: TextDecoration.underline,
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return const ForgotPassScreen();
+                      },),);
+
+                    },
+                    child: Text(
+                      'Forgot Password',
+                      style: const TextStyle().copyWith(
+                        color: orange,
+                        fontSize: 14,
+                        fontFamily: 'Mulish',
+                        fontWeight: FontWeight.w400,
+                        textBaseline: TextBaseline.ideographic,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 ],

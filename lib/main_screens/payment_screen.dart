@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../colors.dart';
+import 'order_success_screen.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key, required this.addedPrice});
@@ -141,31 +142,39 @@ class PaymentScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.05,
               width: MediaQuery.of(context).size.width ,
             ),
-      Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.06,
-        alignment: Alignment.center,
-        decoration: ShapeDecoration(
-          color: orangeMain,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
+      InkWell(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return const OrderSuccessScreen();
+          },),);
+
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.06,
+          alignment: Alignment.center,
+          decoration: ShapeDecoration(
+            color: orangeMain,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            ),
+            shadows: const [
+              BoxShadow(
+                color: Color(0x3FD32525),
+                blurRadius: 8,
+                offset: Offset(0, 4),
+                spreadRadius: 0,
+              )
+            ],
           ),
-          shadows: const [
-            BoxShadow(
-              color: Color(0x3FD32525),
-              blurRadius: 8,
-              offset: Offset(0, 4),
-              spreadRadius: 0,
-            )
-          ],
-        ),
-        child: Text(
-          'Submit Order',
-          textAlign: TextAlign.center,
-          style: const TextStyle().copyWith(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
+          child: Text(
+            'Submit Order',
+            textAlign: TextAlign.center,
+            style: const TextStyle().copyWith(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
       ),
